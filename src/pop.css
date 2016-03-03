@@ -1,0 +1,23 @@
+body {
+    min-width: 300px;
+}
+
+button {
+    height: 40px;
+    width: 200px;
+    text-align: center;
+}
+
+input[type=checkbox] {
+    float: left;
+}
+.setting {
+    min-height: 30px;
+}
+.label {
+    -webkit-user-select: none;
+}
+
+#fcount {
+    font-weight: 700;
+}

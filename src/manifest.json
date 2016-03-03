@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+    "name": "Image Slideshow",
+    "version": "0.0.1",
+
+    "default_locale": "en",
+    "description": "Generate an image slideshow from pictrues on the page.",
+
+    "browser_action": {
+        "default_title": "Slideshow",
+        "default_popup": "pop.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["collect.js"]
+        }
+    ],
+
+    "permissions": ["tabs","<all_urls>"],
+    "incognito": "split"
+}

@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Slideshow</title>
+    <link rel="stylesheet" type="text/css" href="pop.css" />
+</head>
+
+<body>
+    <h1>Slideshow</h1>
+
+    <div id="settings">
+        <div class="setting">
+            <input type="checkbox" data-label="links" />
+            <span class="label"    data-label="links"  >
+                Include links to images
+            </span>
+        </div>
+
+        <div class="setting">
+            <input type="checkbox" data-label="webm" />
+            <span class="label"    data-label="webm"  >
+                Include WEBM format (links only)
+            </span>
+        </div>
+
+        <div class="setting">
+            <input type="checkbox" data-label="thumb" />
+            <span class="label"    data-label="thumb"  >
+                Detect and exclude Thumbnails
+            </span>
+        </div>
+
+        <div class="setting">
+            <input type="checkbox" data-label="follow" />
+            <span class="label"    data-label="follow"  >
+                Detect and get images from popular image viewing sites (ex. Imgur)
+            </span>
+        </div>
+    </div>
+
+    <button id="bFind"           >Find Images</button>    <br />
+    <button id="bSlide" disabled >Start Slideshow</button><br />
+    <button id="nZIP"   disabled >Download as ZIP</button>
+
+    <div id="found">
+        <span id="fcount">0</span> Images found.
+    </div>
+
+    <script type="text/javascript" src="lib/jquery.js"></script>
+    <script type="text/javascript" src="pop.js"></script>
+</body>
+</html>

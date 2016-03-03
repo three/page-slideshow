@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Zip Images</title>
+
+    <link rel="stylesheet" type="text/css" href="zipper.css" />
+</head>
+
+<body>
+    <h1>Zipper</h1>
+
+    <div id="selecter">
+        <select id="imgSelect" multiple>
+            <option value="NO">No Images</option>
+        </select><br />
+        <button id="addImg">Add</button>
+        <button id="remImg">Remove</button>
+    </div>
+
+    <div id="downloader">
+        <img id="preview"></img><br />
+        <progress id="pDone" value="0" max="0"></progress>
+        <div id="dStatus">
+            <em>Status:</em> <span id="dStat"></span>
+        </div>
+        <button id="startDown">START</button>
+        <button id="stopDown" disabled>STOP</button>
+        <button id="getDown" disabled>DOWNLOAD</button>
+    </div>
+
+    <script type="text/javascript" src="../lib/jquery.js"></script>
+    <script type="text/javascript" src="../lib/jszip.js"></script>
+    <script type="text/javascript" src="zipper.js"></script>
+</body>
+</html>
