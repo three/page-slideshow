@@ -1,9 +1,32 @@
 <html>
 <head>
     <title>Image Slideshow</title>
+
+    <link rel="stylesheet" type="text/css" href="slider.css" />
 </head>
 
 <body>
-    <h1>Image Slideshow</h1>
+    <div id="header" class="hideable">
+        <span id="hCounter">0/0</span>
+        <div id="hRun">
+            <span id="hDelay">
+                <input type="number" min="10" max="99999" value="1000" />ms
+            </span>
+            <span id="hPlay" class="act"> <img src="../assets/play.svg"  /></span>
+            <span id="hPause" class="act"><img src="../assets/pause.svg" /></span>
+        </div>
+    </div>
+
+    <div id="viewer">
+        <img id="vView" class="v-img v-view"
+        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+        <img id="vPlace" class="v-img" src="../assets/placeholder.svg" />
+    </div>
+
+    <div id="thumbs" class="hideable">
+    </div>
+
+    <script type="text/javascript" src="../lib/jquery.js"></script>
+    <script type="text/javascript" src="slider.js"></script>
 </body>
 </html>
