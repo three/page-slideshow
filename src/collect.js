@@ -1,6 +1,6 @@
 (function () {
 
-    function collectImages( incLinks, incWebm, noThumb ) {
+    function collectImages( incLinks, incWebm, noThumb, follow ) {
         var imgs = [];
 
         // Detect IMG tags
@@ -13,13 +13,15 @@
             // Detect Links
             eachQuery("a[href]", function (a) {
                 var link = absoluteURL(a.href);
+                if ( follow )
+                    link = followLink(link, incWebm);
                 if ( isImageURL(link, incWebm) ) {
                     imgs.push( link );
                 }
             });
         }
 
-        return imgs;
+        return arrUnique( imgs );
     }
 
     function eachQuery( q, c ) {
@@ -61,10 +63,33 @@
 
         return false;
     }
+    function followLink( link, webm ) {
+        var s = link.split("/");
+        if ( s.length == 4 && s[2] == "imgur.com" ) {
+            var g = s[3].split(".");
+            if ( g.length >= 2 && g[1] == "gifv" ) {
+                if ( webm )
+                    return "http://i.imgur.com/"+g[0]+".webm";
+                else
+                    return "";
+            }
+            if ( g.length > 1 )
+                return link;
+            return "http://i.imgur.com/"+s[3]+".png";
+        }
+        return link;
+    }
+    function arrUnique( arr ) {
+        return arr.reduce(function (a,e) {
+            if ( a.indexOf(e) < 0 && e != "" )
+                a.push(e);
+            return a;
+        }, []);
+    }
 
     chrome.runtime.onMessage.addListener(function (msg, sender, respond) {
         if ( msg.ask == "collect" ) {
-            var images = collectImages( msg.links, msg.webm, msg.nothumb );
+            var images = collectImages( msg.links, msg.webm, msg.nothumb, msg.follow );
             respond({
                     what: "collect",
                     imgs: images,
