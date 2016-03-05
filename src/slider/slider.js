@@ -34,6 +34,7 @@ function ImageManager(images) {
             thumb: genThumb( image ),
             selected: false,
         };
+        img.video = img.url.substr(-5) == ".webm";
 
         $(img.thumb).on("click", (function (i,im) {
             return function (event) {
@@ -77,7 +78,15 @@ ImageManager.prototype.selectImg = function (i) {
     }
     this.current = i;
 
-    $("#vView").prop("src", this.imgs[i].url);
+    if ( !this.imgs[i].video ) {
+        $("#vView").prop("src", this.imgs[i].url);
+        $("#vView")[0].classList.remove("noview");
+        $("#vVid")[0].classList.add("noview");
+    } else {
+        $("#vVid").prop("src", this.imgs[i].url);
+        $("#vView")[0].classList.add("noview");
+        $("#vVid")[0].classList.remove("noview");
+    }
     this.imgs[i].selected = true;
     this.imgs[i].thumb.classList.add("selected");
 
