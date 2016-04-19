@@ -52,10 +52,25 @@ $("#nZIP").on("click", function (e) {
 });
 
 function openAndSendImgs( page ) {
-    chrome.tabs.create({url: page}, function ( created ) {
-        chrome.tabs.sendMessage(created.id, {
-            what: "view",
-            imgs: foundImages,
+    // First we create a new tab for our page. We don't select it at first to
+    // keep the popup open.
+    chrome.tabs.create({url: page,selected:false}, function ( created ) {
+        // The page won't be able to recieve our message until it's fully
+        // loaded, so we have to wait.
+        var loaded = false;
+        chrome.tabs.onUpdated.addListener(function (tabId, info) {
+            if ( tabId == created.id && info.status == "complete" && !loaded ) {
+                loaded = true;
+                // Now we can send the message with the images
+                chrome.tabs.sendMessage(created.id, {
+                    what: "view",
+                    imgs: foundImages,
+                },{},function (res) {
+                    // And, finally, we can select the tab
+                    // (welcome to callback hell)
+                    chrome.tabs.update(created.id, {selected: true});
+                });
+            }
         });
     });
 }
